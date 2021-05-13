@@ -1,0 +1,120 @@
+{% extends 'momentumx/base_content_sidebar_left.html' %}
+{% load static %}
+{% block main %}
+<div class="container"> 
+				
+				<!-- Logo -->
+				<div id="logo">
+					<h1><a href="#">Learn to invest</a></h1>
+					<span class="tag">Start investing today</span>
+				</div>
+			</div>
+		</div>
+	<!-- Header --> 
+
+	<!-- Main -->
+		<div id="main">
+			<div class="container">
+				<div class="row">
+					{% block sidebar %}
+					<!-- Sidebar -->
+					<div id="sidebar" class="6u">
+						<section>
+							<header>
+								<h2>Navigation</h2>
+							</header>
+							<div class="row">
+								<section class="6u">
+									<ul class="default">
+										<li><a href="#"class="btn btn-light">All features explained</a></li>
+										<li><a href="#"></a></li>
+										<li><a href="#"></a></li>
+										<li><a href="#"></a></li>
+									</ul>
+								</section>
+								<section class="6u">
+									<ul class="default">
+										<li><a href="#"></a></li>
+										<li><a href="#">>
+										<li><a href="#"></a></li>
+										<li><a href="#"></a></li>
+										<li><a href="#"></a></li>
+									</ul>
+								</section>
+							</div>
+						</section>
+					</div>
+					{% endblock %}
+					<!-- Content -->
+					<div id="content" class="10u skel-cell-important">
+						{% block content %}
+						<section>
+							<header>
+								<h2>All features explained</h2>
+							</header>
+							<p>
+								MomentumX is a planning tool for investments in the american and norwegian stock market. It is a simplified approach to investment which focuses on various aspects of the company. It is however expected from each investor that they read and use time to go through quarterly and annual reports from the company. However, MomentumX has been used successfully to make quite a lot of gain on various stocks in the stock market without much reflection on the reports. The information in each investment profile gives a quite simple and easy overview of if you should use more time to consider this investment and even make an investment.
+							</p>
+							<p>
+								For a lot of people MomentumX will be a planning tool to get an overview of the company and then, if everything looks good, continue to analyze the company further. However, it can also be used to decide if you want to make an investment right away. Based on experience it does not always take a lot of time to choose a successfull investment in the stock market, but it does take a few hours at least. What MomentumX can help with is to make the process quicker and easier.<p>
+							<p>
+								Please do keep in mind that even though only an investment profile on MomentumX has been sufficient several times to make a successfull investment, it is expected that you do the necessary work. You should never invest in a company or industry you dont understand. You have to understand the products, the customer base and what the future of the company might be. MomentumX can help with that, but the annual reports is for example where you will find the more valuable information. You may however put the most usefull information in that report into MomentumX to get a good overview.
+							<p>
+						</section>
+						<section>
+							<header>
+								<h2>MomentumX in detail</h2>
+							</header>
+							<p>This page describes MomentumX in detail, but it does not descibe every feature of MomentumX. This page is simply a more detailed description of what is found in the "Brief overview" section. If you want to read and understand every feature of MomentumX then please see the "Help" pages for more information.</p>
+							<p>Text text text</p>
+						</section>
+						<section>
+							<header>
+								<h2>Why MomentumX ?</h2>
+							</header>
+							<p>MomentumX is a great tool to follow and plan your investments. It makes it easy to can a simple overview and keep track of which investments you are going to make, which investment you have rejected and which investment you want to spend more time looking at.</p>
+						</section>
+						<section>
+							<header>
+								<h2>Is MomentumX free of charge ?</h2>
+							</header>
+							<p>Text text text</p>
+						</section>
+						<section>
+							<header>
+								<h2>Where can I learn more ?</h2>
+							</header>
+							<p>You can learn more about MomentumX at the <a href="{% url 'info:help' %}">Help</a> pages.
+						</section>
+						<section>>
+							<header>
+								<h2>Why the name "MomentumX" ?</h2>
+							</header>
+							<p>The name "MomentumX" is choosen because it reflects the momentum a stock has in the stock market.</p>
+						</section>
+						<section>>
+							<header>
+								<h2>How can I contact you ?</h2>
+							</header>
+							<p>You can contact MomentumX by using the <a href="{% url 'info:contact' %}">contact</a> link. If there is anything you are wondering about or have a business request you may use the contact form. At this time this is the only way to contact MomentumX.</p>
+						</section>
+						<section>
+							<header>
+								<h2>Which markets do you support ?</h2>
+							</header>
+							<p>At this time only the U.S stock market and the Norwegian stock market is supported.
+						</section>
+						<section>
+							<header>
+								<h2>Can you track stock price movements ?</h2>
+							</header>
+							<p>Stock market prices used to be easy and free to get a hold of. At this time there is no reliable, stable or supported ways to get stock market data for free. To be able to add additional functionality like stock prices MomentumX would have to be in a position where it generates significant recurring revenue to be able to pay for access to this information. It does not necessarily take much time to implement, but the cost is too much at this time. As MomentumX gets more users and revenue the more services and functionality it can offer to its users.
+						</section>
+						{% endblock %}
+					</div>
+
+				</div>
+			</div>
+		</div>
+	<!-- /Main -->
+{% endblock %}

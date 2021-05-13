@@ -1,0 +1,62 @@
+{% extends 'momentumx/base_content_nosidebar.html' %}
+{% load static %}
+{% block main %}
+<div class="container"> 
+	<!-- Logo -->
+	<div id="logo">
+		<h1><a href="#">Register</a></h1>
+		<span class="tag">Create a new account</span>
+	</div>
+</div>
+</div>
+	<!-- Header --> 
+	<!-- Main -->
+		<div id="main">
+			<div id="content" class="container">
+				<section>
+					<div class="row" style="border: 1px dashed black">
+					<form method="POST" action="{% url 'user:create_user' %}" style="margin: 0px auto">
+					<header>
+						<h2>New account at MomentumX</h2>
+						<small>Type in the necessary information to create an account</small>
+					</header>
+						{% csrf_token %}
+						{% if form.errors %}
+							<p>There were one or more errors when processing the form</p>
+							{% for field in form %}
+								{% if field.errors %}
+									{{ field.label }}: <b>{{ field.errors }}</b>
+								{% endif %}
+							{% endfor %}
+						{% elif success %}
+						<p><b>Account was created successfully.</b></p>
+						<p><b>You can log in with your new account by <a href="">clicking here</a></b></p>
+						{% endif %}
+						<br />
+						<div class="form-group">
+							<label for="username">Username:</label>
+							<input type="text" class="form-control" name="username"></input>
+							<small>{{ form.username.help_text }}</small>
+						</div>
+						<div class="form-group">
+							<label for="password">Password:</label>
+							<input type="password" class="form-control" name="password1"></input>
+							<small>{{ form.password1.help_text }}</small>
+						</div>
+						<div class="form-group">
+							<label for="confirm_password">Confirm password:</label>
+							<input type="password" class="form-control" name="password2"></input>
+						</div>
+						<div class="form-group">
+							<label for="terms">I have read and understood the <a href="">terms and conditions</a> for using this site</label>
+							<input type="checkbox" name="terms" unchecked>
+						</div>
+						<button type="submit" class="btn btn-primary">Register</button>
+						<br />
+						<br />
+					</div>
+					</form>
+				</section>
+			</div>
+		</div>
+{% endblock %}

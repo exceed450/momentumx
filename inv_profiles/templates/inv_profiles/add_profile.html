@@ -1,0 +1,55 @@
+{% extends 'momentumx/base.html' %}
+{% load static %}
+{% block main %}
+			<div class="container">
+				
+				<!-- Logo -->
+				<div id="logo">
+					<h1><a href="#">Investment profiles</a></h1>
+					<span class="tag">Keep track of each investment with an investment profile</span>
+				</div>
+			</div>
+		</div>
+	<!-- Header --> 
+
+	<!-- Main -->
+		<div id="main">
+			<div class="container" style="border: 1px solid #C7D8C1">
+                <section class="8u" style="margin: 0px auto">
+                    <div style="width: 85%; margin: 0px  auto">
+										<a href="#" class="btn btn-success btn-sm" style="width: 100px; background: #e6ede4; color: black">About</a>
+										<a href="{% url 'inv_profiles:profiles' %}" class="btn btn-success btn-sm" style="width: 100px; background: #e6ede4; color: black">Technicals</a>
+										<a href="#" class="btn btn-sm" style="width: 100px; background: #e6ede4; color: black; border: 1px solid green">Fundamentals</a>
+										<a href="#" class="btn btn-success btn-sm" style="width: 100px; background: #e6ede4; color: black">Calendar</a>
+										<a href="#" class="btn btn-success btn-sm" style="width: 100px; background: #e6ede4; color: black">News</a>
+										<a href="#" class="btn btn-success btn-sm" style="width: 100px; background: #e6ede4; color: black">Ratings</a>
+                    </div>
+                </section>
+
+                    <br />
+                    <br />
+					
+					<!-- Content -->
+					<div id="content" class="12u skel-cell-important">
+                            <header>
+								<h2>Create new investment profile</h2>
+								<p>You only need to provide a company name to create a profile. You can add much more information after the profile has been created.</p>
+								{% if success %}
+								<p><b>New investment profile created successfully.</b></p>
+								<p>You may <a href="{% url 'inv_profiles:view_profile' ">view</a> and <a href="">edit</a> the investment profile or go to the <a href="">investment profile overview</a> page.</p>
+								{% endif %}
+							</header>
+						<section style="border: 3px solid #C7D8C1">
+							<form method="POST" action="{% url 'inv_profiles:add_profile' %}">
+								{% csrf_token %}
+								{{ form }}
+								<br />
+								<input type="submit" value="Create new profile">
+							</form>
+						</section><br />
+					</div>
+				</div>
+			</div>
+		</div>
+	<!-- /Main -->
+	{% endblock %}

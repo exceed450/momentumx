@@ -1,0 +1,52 @@
+{% extends 'momentumx/base_content_nosidebar.html' %}
+{% load static %}
+{% block main %}
+<div class="container"> 
+	<!-- Logo -->
+	<div id="logo">
+		<h1><a href="#">Log in</a></h1>
+		<span class="tag">Log in using your MomentumX account</span>
+	</div>
+</div>
+</div>
+	<!-- Header --> 
+	<!-- Main -->
+		<div id="main">
+			<div id="content" class="container">
+				<section>
+					<div class="row" style="border: 1px dashed black">
+					<form method="POST" action="{% url 'user:login_user' %}" style="margin: 0px auto">
+					{% csrf_token %}
+					<header>
+						<h2>Login to MomentumX</h2>
+					</header>
+					{% if success %}
+						<b>You were logged in successfully.</b>
+					{% endif %}
+					{% if failure %}
+						<b>Error: Failed to log you in.</b><br />
+						<b>Please make sure your username and password is correct.</b>
+						<br />
+						<small>If you have problems logging in you may <a href="">reset your password</a> or <a href="">contact MomentumX</a> for assistance.</small>
+					{% endif %}
+					<br />
+						<br />
+						<div class="form-group">
+							<label for="username">Username:</label>
+							<input type="text" class="form-control" name="username"></input>
+							<small>{{ form.username.help_text }}</small>
+						</div>
+						<div class="form-group">
+							<label for="password">Password:</label>
+							<input type="password" class="form-control" name="password"></input>
+							<small>{{ form.password.help_text }}</small>
+						</div>
+						<button type="submit" class="btn btn-primary">Login</button>
+						<br />
+						<br />
+					</div>
+					</form>
+				</section>
+			</div>
+		</div>
+{% endblock %}

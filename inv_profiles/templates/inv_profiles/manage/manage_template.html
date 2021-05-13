@@ -1,0 +1,118 @@
+{% extends 'momentumx/base.html' %}
+{% load static %}
+
+<!--
+    TEMPLATE FOR ALL MANAGE PAGES
+    When creating a new manage page use the manage_template.html file
+-->
+{% block main %}
+			<div class="container">
+				
+				<!-- Logo -->
+				<div id="logo">
+					<h1><a href="#">Investment profiles</a></h1>
+					<span class="tag">Keep track of each investment with an investment profile</span>
+				</div>
+			</div>
+		</div>
+	<!-- Header --> 
+
+	<!-- Main -->
+		<div id="main">
+			<div class="container" style="border: 1px solid #C7D8C1">
+                <section class="8u" style="margin: 0px auto">
+                    <div style="width: 85%; margin: 0px  auto">
+										<a href="#" class="btn btn-success btn-sm" style="width: 100px; background: #e6ede4; color: black">About</a>
+										<a href="{% url 'inv_profiles:profiles' %}" class="btn btn-success btn-sm" style="width: 100px; background: #e6ede4; color: black">Technicals</a>
+										<a href="#" class="btn btn-sm" style="width: 100px; background: #e6ede4; color: black; border: 1px solid green">Fundamentals</a>
+										<a href="#" class="btn btn-success btn-sm" style="width: 100px; background: #e6ede4; color: black">Calendar</a>
+										<a href="#" class="btn btn-success btn-sm" style="width: 100px; background: #e6ede4; color: black">News</a>
+										<a href="#" class="btn btn-success btn-sm" style="width: 100px; background: #e6ede4; color: black">Ratings</a>
+                    </div>
+                </section>
+
+                    <br />
+                    <br />
+					
+					<!-- Content -->
+					<div id="content" class="12u skel-cell-important">
+                            <header>
+								<h2>{% block content_title %}{% endblock %}</h2>
+							</header>
+                        <header>
+                            <h3><b>{% block table_create_title %}{% endblock %}</b></h3>
+                        </header>
+						<section style="border: 3px solid #C7D8C1">
+							<form method="POST" action="{% block create_form_action_url %}{% endblock %}" style="border: 1px solid black">
+								{% csrf_token %}
+                                {% block create_form_table_row %}{% endblock %}
+								<br />
+								<input type="submit" value="{% block submit_create_label %}{% endblock %}" style="background-color: #C7D8C1; color: black" class="btn btn-secondary">
+                                <br />
+                                <br />
+							</form>
+
+                            <br />
+                            <br />
+                            <header>
+                                <h3><b>{% block table_display_title %}{% endblock %}</b></h3>
+                            </header>
+							{% for element in all_elements %}
+                                <table class="table table-bordered" style="border: 4px solid #C7D8C1">
+                                <thead>
+                                    <tr>
+                                        {% block table_display_row %}{% endblock %}
+                                    </tr>
+                                </thead>
+                                <tbody>
+        							<tr>
+                                        {% if element.id == element_id %}
+                                            <form method="POST" action="{% block modify_form_action_url %}{% endblock %}">
+                                                {% csrf_token %}
+                                                {% block modify_form_row %}{% endblock %}
+                                                <td>
+                                                    <input type="submit" value="Save changes" style="background-color: #C7D8C1; color: black" class="btn btn-secondary">
+                                                </td>
+                                            </form>
+                                        {% else %}
+                                            {% block modify_form_display_row %}{% endblock %}
+                                            <td>
+                                                <a href="{% block modify_button_href %}{% endblock %}" style="background-color: #C7D8C1; color: black" class="btn btn-secondary">Modify</a>
+                                                <a href="{% block delete_button_href %}{% endblock %}" style="background-color: #C7D8C1; color: black" class="btn btn-secondary">Delete</a>
+                                            </td>
+                                        {% endif %}
+                                    </tr>
+
+						</tbody>
+					</table>
+							{% endfor %}
+                                {% if all_elements.has_other_pages %}
+                                              <ul class="pagination">
+                                                {% if all_elements.has_previous %}
+                                                  <li><a href="?page={{ all_elements.previous_page_number }}">&laquo;</a></li>
+                                                {% else %}
+                                                  <li class="disabled"><span>Go to next page &laquo;</span></li>
+                                                {% endif %}
+
+                                                {% for i in all_elements.paginator.page_range %}
+                                                  {% if all_elements.number == i %}
+                                                    <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                                                  {% else %}
+                                                    <li><a href="?page={{ i }}">{{ i }}</a></li>
+                                                  {% endif %}
+                                                {% endfor %}
+
+                                                {% if all_elements.has_next %}
+                                                  <li><a href="?page={{ all_elements.next_page_number }}">&raquo;</a></li>
+                                                {% else %}
+                                                  <li class="disabled"><span>&raquo;</span></li>
+                                                {% endif %}
+                                              </ul>
+                                            {% endif %}
+						</section><br />
+					</div>
+				</div>
+			</div>
+		</div>
+	<!-- /Main -->
+	{% endblock %}

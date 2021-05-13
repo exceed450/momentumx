@@ -1,0 +1,86 @@
+{% extends 'momentumx/base.html' %}
+{% load static %}
+{% block main %}
+        <div class="container">
+				<!-- Logo -->
+				<div id="logo">
+					<h1><a href="#">Investment profiles</a></h1>
+					<span class="tag">Keep track of each investment with an investment profile</span>
+				</div>
+			</div>
+		</div>
+	<!-- Header --> 
+
+	<!-- Main -->
+		<div id="main">
+			<div class="container" style="border: 1px solid #C7D8C1">
+
+                    <!-- Content -->
+					<div id="content" class="12u skel-cell-important">
+                        {% if authenticated %}
+                            <header>
+								<h2>All investment profiles</h2>
+							</header>
+                            <p class="h6">
+                                An investment profile lets you plan and keep track of your investment in the
+                                stock market. <a href="{% url 'info:help' %}">Learn more about investment profiles</a>.
+                            </p>
+
+                         {% if success_created %}
+                                <p>
+                                    <b class="alert alert-info">Successfully added investment profile.</b>
+                                </p>
+                         {% endif %}
+
+                            {% if success_deleted %}
+                                <p>
+                                    <b class="alert alert-info">Successfully deleted investment profile.</b>
+                                </p>
+                            {% endif %}
+
+                            <section style="border: 3px solid #C7D8C1">
+                                {% if investment_profiles %}
+                                    <table class="table table-bordered" style="border-bottom: 1px dotted black; margin: 0px">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 250px; background-color: #e6ede4"><b>Company</b></th>
+                                                <th style="width: 250px; background-color: #e6ede4"><b>Opinion fundamentals</b></th>
+                                                <th style="width: 250px; background-color: #e6ede4"><b>Opinion technials</b></th>
+                                                <th style="width: 250px; background-color: #e6ede4"><b>Actual performance</b></th>
+                                                <th style="width: 175px; background-color: #e6ede4"><b></b></th>
+                                                <th style="width: 175px; background-color: #e6ede4"><b></b>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for profile in investment_profiles %}
+                                            <tr>
+                                                <td>{{ profile.company }}</td>
+                                                <td>{{ profile.get_fundamental_analysis_opinion_display }}</td>
+                                                <td>{{ profile.get_tech_analysis_opinion_display }}</td>
+                                                <td>{{ profile.get_stock_momentum_display }}</td>
+                                                <td><a href="{% url 'inv_profiles:view_profile' profile.id %}" class="btn btn-secondary" style="background: #e6ede4; color: black">View profile</a></td>
+                                                <td><a href="{% url 'inv_profiles:delete_profile' profile.id %}" class="btn btn-secondary" style="background: #e6ede4; color: black">Delete profile</a></td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                {% else %}
+                                    <b>No investment profiles found.</b>
+                                    <br />
+                                {% endif %}
+
+                                <br />
+                                <a href="{% url 'inv_profiles:add_profile' %}" class="btn btn-secondary" style="background-color: #e6ede4; color: black">Add new investment profile</a>
+                            {% else %}
+                                <b>
+                                    <p class="alert alert-info h5" role="alert">You need to be logged in to create an investment profile.
+                                        <br />
+                                        <a href="{% url 'user:login_user' %}">Log-in here</a> or <a href="{% url 'user:create_user' %}">create a new account</a>.
+                                    </p>
+                                </b>
+                            {% endif %}
+				</div>
+			</div>
+		</div>
+	<!-- /Main -->
+	{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'inv_profiles/manage/manage_template.html' %}
+{% block content_title %}Manage transactions{% endblock %}
+
+<!-- Create form -->
+{% block table_create_title %}Add transaction{% endblock %}
+{% block create_form_action_url %}{% url 'inv_profiles:add_transaction' profile.id %}{% endblock %}
+{% block table_create_row_title %}Title{% endblock %}
+{% block table_create_row_form_element %}{{ form.title }}{% endblock %}
+
+{% block create_form_table_row %}
+<p style="background-color: #C7D8C1; margin: 0px;  font-size: 16px; color: black">Type</p>
+    {{ form.type_of_transaction }}
+<p style="background-color: #C7D8C1; margin: 0px;  font-size: 16px; color: black">Amount</p>
+    {{ form.amount }}
+<p style="background-color: #C7D8C1; margin: 0px;  font-size: 16px; color: black">Date</p>
+    {{ form.date_of_transaction }}
+{% endblock %}
+
+{% block submit_create_label %}Create new transaction{% endblock %}
+
+
+<!-- Display/modify form -->
+{% block table_display_title %}All transactions:{% endblock %}
+{% block table_display_row %}
+    <th style="background: #C7D8C1">Type</th>
+    <th style="background: #C7D8C1">Amount</th>
+    <th style="background: #C7D8C1">Date</th>
+{% endblock %}
+
+{% block modify_form_action_url %}
+    {% url 'inv_profiles:modify_transaction' profile.id element.id %}
+{% endblock %}
+
+<!-- Show this when the user enters the manage reports page to display a list of reports that can be modified -->
+{% block modify_form_display_row %}
+    <td width="40%">{{ element.get_type_of_transaction_display }}</td>
+    <td width="40%">{{ element.date_of_transaction }}</td>
+{% endblock %}
+
+<!-- Show this when the user click on "Modify" -->
+{% block modify_form_row %}
+    <td width="25%">{{ modify_form.type_of_transaction }}</td>
+    <td width="25%">{{ modify_form.amount }}</td>
+    <td width="25%">{{ modify_form.date_of_transaction }}</td>
+{% endblock %}
+
+{% block modify_button_href %}
+    {% url 'inv_profiles:modify_transaction' profile.id element.id %}
+{% endblock %}
+
+{% block delete_button_href %}
+    {% url 'inv_profiles:delete_transaction' profile.id element.id %}
+{% endblock %}

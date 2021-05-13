@@ -1,0 +1,58 @@
+{% extends 'inv_profiles/manage/manage_template.html' %}
+{% block content_title %}Manage reports{% endblock %}
+
+<!-- Create form -->
+{% block table_create_title %}Add reports{% endblock %}
+{% block create_form_action_url %}{% url 'inv_profiles:add_report' profile.id %}{% endblock %}
+{% block table_create_row_title %}Title{% endblock %}
+{% block table_create_row_form_element %}{{ form.title }}{% endblock %}
+
+{% block create_form_table_row %}
+<p style="background-color: #C7D8C1; margin: 0px;  font-size: 16px; color: black">Title</p>
+    {{ form.title }}
+<p style="background-color: #C7D8C1; margin: 0px;  font-size: 16px; color: black">Report type</p>
+    {{ form.report_type }}
+<p style="background-color: #C7D8C1; margin: 0px;  font-size: 16px; color: black">Link</p>
+    {{ form.link }}
+{% endblock %}
+
+{% block submit_create_label %}Create new report{% endblock %}
+
+
+<!-- Display/modify form -->
+{% block table_display_title %}All reports:{% endblock %}
+{% block table_display_row %}
+    <th style="background: #C7D8C1">Title</th>
+    <th style="background: #C7D8C1">Type</th>
+    {% if modify_data %}
+        <th style="background: #C7D8C1">Link</th>
+        <th style="background: #C7D8C1"></th>
+    {% else %}
+        <th style="background: #C7D8C1"></th>
+    {% endif %}
+{% endblock %}
+
+{% block modify_form_action_url %}
+    {% url 'inv_profiles:modify_report' profile.id element.id %}
+{% endblock %}
+
+<!-- Show this when the user enteres the manage reports page to display a list of reports that can be modified -->
+{% block modify_form_display_row %}
+    <td width="40%">{{ element.title }}</td>
+    <td width="40%">{{ element.get_report_type_display }}</td>
+{% endblock %}
+
+<!-- Show this when the user click on "Modify" -->
+{% block modify_form_row %}
+    <td width="25%">{{ modify_form.title }}</td>
+    <td width="25%">{{ modify_form.report_type }}</td>
+    <td width="25%">{{ modify_form.link }}</td>
+{% endblock %}
+
+{% block modify_button_href %}
+    {% url 'inv_profiles:modify_report' profile.id element.id %}
+{% endblock %}
+
+{% block delete_button_href %}
+    {% url 'inv_profiles:delete_report' profile.id element.id %}
+{% endblock %}

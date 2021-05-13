@@ -1,0 +1,231 @@
+{% extends 'momentumx/base.html' %}
+{% load static %}
+{% block main %}
+			<div class="container">
+				
+				<!-- Logo -->
+				<div id="logo">
+					<h1><a href="#">Investment profiles</a></h1>
+					<span class="tag">Keep track of each investment with an investment profile</span>
+				</div>
+			</div>
+		</div>
+	<!-- Header --> 
+
+	<!-- Main -->
+		<div id="main">
+			<div class="container" style="border: 1px solid #C7D8C1">
+                <section class="8u">
+                    <div style="width: 1200px; margin: 0px  auto">
+                        {% if profile.exchange == "NDAQ" or profile.exchange == "NYSE" %}
+                            {% if profile.ticker != "None" and profile.ticker != "" %}
+                                <a href="https://www.nasdaq.com/market-activity/stocks/{{ profile.ticker }}/news-headlines" class="btn btn-success btn-sm" style="width: 175px; background: #e6ede4; color: black">{{ profile.company }} latest news (nasdaq)</a>
+                                <a href="https://www.wsj.com/market-data/quotes/{{ profile.ticker }}/financials" class="btn btn-success btn-sm" style="width: 175px; background: #e6ede4; color: black">{{ profile.company }} fundamentals (wsj)</a>
+                                <a href="https://www.tradingview.com/symbols/NASDAQ-{{ profile.ticker }}/" class="btn btn-success btn-sm" style="width: 175px; background: #e6ede4; color: black">{{ profile.company }} technicals (tradingview)</a>
+                                <a href="https://www.nasdaq.com/market-activity/stocks/{{ profile.ticker }}/sec-filings" class="btn btn-success btn-sm" style="width: 175px; background: #e6ede4; color: black">{{ profile.company }} SEC filings (nasdaq)</a>
+                                <a href="https://www.nasdaq.com/market-activity/stocks/{{ profile.ticker }}/analyst-research" class="btn btn-success btn-sm" style="width: 200px; background: #e6ede4; color: black">{{ profile.company }} analyst ratings (nasdaq)</a>
+                                <a href="https://www.nasdaq.com/market-activity/stocks/{{ profile.ticker }}/insider-activity" class="btn btn-success btn-sm" style="width: 200px; background: #e6ede4; color: black">{{ profile.company }} insider activity (nasdaq)</a>
+                            {% else %}
+                                <b class="alert alert-info" style="align: left">Update the exchange information and ticker to get usefull links and a performance graph (if the stock is listed on NASDAQ, NYSE or Oslo stock exchange)</b>
+                            {% endif %}
+                        {% elif profile.exchange == "OSEBX" or profile.exchange == "Oslo børs"  or profile.exchange == "Oslo stock exchange" %}
+                            {% if profile.ticker != "None" and profile.ticker != "" %}
+                                <a href="https://aksjelive.e24.no/instrument/{{ profile.ticker }}.OSE" class="btn btn-success btn-sm" style="width: 175px; background: #e6ede4; color: black">{{ profile.company }} news</a>
+                                <a href="https://www.wsj.com/market-data/quotes/NO/XOSL/{{ profile.ticker }}/financials" class="btn btn-success btn-sm" style="width: 200px; background: #e6ede4; color: black">{{ profile.company }} fundamentals</a>
+                                <a href="https://www.tradingview.com/symbols/OSL-{{ profile.ticker }}/" class="btn btn-success btn-sm" style="width: 175px; background: #e6ede4; color: black">{{ profile.company }} technicals</a>
+                                <a href="https://newsweb.oslobors.no/search?category=&issuer=&fromDate=&toDate=&market=&messageTitle={{ profile.ticker }}" class="btn btn-success btn-sm" style="width: 175px; background: #e6ede4; color: black">{{ profile.company }} SEC filings</a>
+                                <a href="https://www.wsj.com/market-data/quotes/NO/XOSL/{{ profile.ticker }}/research-ratings" class="btn btn-success btn-sm" style="width: 200px; background: #e6ede4; color: black">{{ profile.company }} analyst ratings</a>
+                            {% else %}
+                                <b class="alert alert-info" style="align: left">Update the exchange information and ticker to get usefull links and a performance graph (if the stock is listed on NASDAQ, NYSE or Oslo stock exchange)</b>
+                            {% endif %}
+                        {% else %}
+                                <p class="alert alert-info" style="width: 90%; border: 1px solid black; font-weight: bold">Update the exchange information and ticker to get usefull links and a performance graph (if the stock is listed on NASDAQ, NYSE or Oslo stock exchange)</p>
+                        {% endif %}
+                        </div>
+                </section>
+					<!-- Content -->
+					<div id="content" class="12u skel-cell-important">
+                            <header>
+								<h2>Investment profile for {{ profile.company }}</h2>
+							</header>
+
+                        <!-- BASIC INFORMATION -->
+            {% if profile.exchange == "NDAQ" or profile.exchange == "NYSE" %}
+						<section style="border: 3px solid #C7D8C1">
+                            <h2 style="background-color: #C7D8C1; font-size: 18px; padding: 5px"><b>STOCK PERFORMANCE INFORMATION</b></h2>
+                            <table class="table table-bordered" style="border-bottom: 1px dotted black; margin: 0px">
+								<tbody>
+                                    <tr>
+										<td height="350px">
+
+                                            <!-- TradingView Widget BEGIN -->
+                <div class="tradingview-widget-container">
+                  <div id="tradingview_f1402"></div>
+                  <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/{{ profile.ticker }}/" rel="noopener" target="_blank"><span class="blue-text">{{ profile.ticker }}</span></a> by TradingView</div>
+                  <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+                  <script type="text/javascript">
+                  new TradingView.MediumWidget(
+                  {
+                  "symbols": [
+                      {% if profile.ticker != "None" %}
+                    [
+                      "{{ profile.company }}",
+                      "{{ profile.ticker }}"
+                    ]
+                      {% else %}
+                    [
+                      "UPDATE COMPANY TICKER TO GET CHART DATA FOR STOCKS ON NASDAQ NYSE AND OSLO STOCK EXCHANGE",
+                      ""
+                    ]
+                      {% endif %}
+                  ],
+                  "chartOnly": false,
+                  "width": "100%",
+                  "height": "100%",
+                  "locale": "en",
+                  "colorTheme": "light",
+                  "gridLineColor": "#f0f3fa",
+                  "trendLineColor": "#2196f3",
+                  "fontColor": "#787b86",
+                  "underLineColor": "#e3f2fd",
+                  "isTransparent": false,
+                  "autosize": true,
+                  "container_id": "tradingview_f1402"
+                }
+                  );
+                  </script>
+                </div>
+                <!-- TradingView Widget END -->
+                                        </td>
+									</tr>
+								</tbody>
+							</table>
+                            <div style="background-color: #e6ede4; width: 100%; margin: 0px auto; height: 50px"><b></b></div>
+            {% endif %}
+							<h2 style="background-color: #C7D8C1; font-size: 18px; padding: 5px"><b>GENERAL INFORMATION</b></h2>
+							<table class="table table-bordered" style="border-bottom: 1px dotted black; margin: 0px">
+								<thead>
+									<tr>
+										<th style="width: 250px"><b>Company</b></th>
+										<th style="width: 250px"><b>Exchange</b></th>
+										<th style="width: 250px"><b>Ticker</b></th>
+										<th style="width: 250px"><b>Overall rating</b></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>{{ profile.company }}</td>
+										<td>{{ profile.get_exchange_display }}</td>
+										<td>{{ profile.ticker }}</td>
+										<td>{{ profile.get_rating_display }}</td>
+									</tr>
+								</tbody>
+							</table>
+                            <div style="background-color: #e6ede4; width: 100%; margin: 0px auto; height: 50px"><b></b></div>
+							<h2 style="background-color: #C7D8C1; font-size: 18px; padding: 5px"><b>DECISIONS</b></h2>
+							<table class="table table-bordered" style="border-bottom: 1px dotted #C7D8C1; margin: 0px">
+								<thead>
+									<tr>
+										<th><b>Decision/status</b></th>
+										<th><b>Opinion technical analysis<br/></b></th>
+                                        <th><b>Opinion fundamental analysis<br/></b></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td style="width: 250px">{{ profile.get_investment_decision_display }}</td>
+                                        <td style="width: 250px">{{ profile.get_tech_analysis_opinion_display }}</td>
+										<td style="width: 250px">{{ profile.get_fundamental_analysis_opinion_display }}</td>
+									</tr>
+								</tbody>
+							</table>
+                            <div style="background-color: #e6ede4; width: 100%; margin: 0px auto; height: 50px"><b></b></div>
+							<h2 style="background-color: #C7D8C1; font-size: 18px; padding: 5px"><b>ABOUT THE INVESTMENT</b></h2>
+							<table class="table table-bordered" style="margin: 0px">
+								<thead>
+									<tr>
+										<th><b>Investment type</b></th>
+										<th><b>Investment status</b></th>
+										<th><b>Stock momentum</b></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td style="width: 250px">{{ profile.get_investment_type_display }}</td>
+										<td style="width: 250px">{{ profile.get_investment_status_display }}</td>
+										<td style="width: 250px">{{ profile.get_stock_momentum_display }}</td>
+									</tr>
+								</tbody>
+							</table>
+                            <div style="background-color: #e6ede4; width: 100%; margin: 0px auto; height: 50px"><b></b></div>
+                            <h2 style="background-color: #C7D8C1; padding: 5px; font-size: 18px"><b>INVESTMENT STRATEGIES</b></h2>
+							<table class="table table-bordered" style="margin: 0px">
+								<thead>
+									<tr>
+										<th><b>Entry strategy</b></th>
+										<th><b>Exit strategy</b></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td style="width: 250px">{{ profile.entry_strategy }}</td>
+										<td style="width: 250px">{{ profile.exit_strategy }}</td>
+									</tr>
+								</tbody>
+							</table>
+                            <div style="background-color: #e6ede4; width: 100%; margin: 0px auto; height: 50px"><b></b></div>
+                            <h2 style="background-color: #C7D8C1; padding: 5px; font-size: 18px"><b>NOTES</b></h2>
+							<table class="table table-bordered" style="margin: 0px">
+								<tbody>
+									<tr>
+										<td>{{ profile.general_notes }}</td>
+									</tr>
+								</tbody>
+							</table>
+
+							<!-- REPORTS -->
+                            <br />
+                            <a href="{% url 'inv_profiles:edit_profile' profile.id %}" class="btn btn-outline-secondary">Edit profile information</a>
+                            <br />
+                            <br />
+                            <br />
+							<h2 style="background-color: #C7D8C1; padding: 5px; font-size: 18px"><b>OTHER INFORMATION</b></h2>
+                            <br />
+							<table class="table table-bordered" style="margin: 0px">
+								<tbody>
+									<tr align="left">
+										<td>
+                                            <h2 style="font-size: 16px"><b><a href="{% url 'inv_profiles:manage_reports' profile.id %}" class="btn btn-secondary" style="background-color: #C7D8C1; color: black">MANAGE REPORTS</a></b></h2>
+                                        </td>
+                                        <td>
+                                            <h2 style="font-size: 16px"><b><a href="{% url 'inv_profiles:manage_analysis' profile.id %}" class="btn btn-secondary" style="background-color: #C7D8C1; color: black">MANAGE ANALYSIS</a></b></h2>
+                                        </td>
+                                        <td>
+                                            <h2 style="font-size: 16px"><b><a href="{% url 'inv_profiles:manage_revenue_sources' profile.id %}" class="btn btn-secondary" style="background-color: #C7D8C1; color: black">MANAGE REVENUE SOURCES</a></b></h2>
+                                        </td>
+                                        <td>
+                                            <h2 style="font-size: 16px"><b><a href="{% url 'inv_profiles:manage_transactions' profile.id %}" class="btn btn-secondary" style="background-color: #C7D8C1; color: black">MANAGE TRANSACTIONS</a></b></h2>
+                                        </td>
+
+									</tr>
+                                    <tr align="left">
+                                        <td>
+                                            <h2 style="font-size: 16px"><b><a href="{% url 'inv_profiles:manage_business_segments' profile.id %}" class="btn btn-secondary" style="background-color: #C7D8C1; color: black">MANAGE BUSINESS SEGMENTS</a></b></h2>
+                                        </td>
+                                        <td>
+                                            <h2 style="font-size: 16px"><b><a href="{% url 'inv_profiles:manage_competitors' profile.id %}" class="btn btn-secondary" style="background-color: #C7D8C1; color: black">MANAGE COMPETITORS</a></b></h2>
+                                        </td>
+                                        <td>
+                                            <h2 style="font-size: 16px"><b><a href="{% url 'inv_profiles:manage_metrics' profile.id %}" class="btn btn-secondary" style="background-color: #C7D8C1; color: black">MANAGE METRICS</a></b></h2>
+                                        </td>
+                                        <td>
+                                            <h2 style="font-size: 16px"><b><a href="{% url 'inv_profiles:manage_risks' profile.id %}" class="btn btn-secondary" style="background-color: #C7D8C1; color: black">MANAGE RISKS</a></b></h2>
+                                        </td>
+                                    </tr>
+                                </tbody>
+							</table>
+				</div>
+			</div>
+		</div>
+	<!-- /Main -->
+	{% endblock %}

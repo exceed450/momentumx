@@ -1,0 +1,50 @@
+{% extends 'inv_profiles/manage/manage_template.html' %}
+{% block content_title %}Manage competitors{% endblock %}
+
+<!-- Create form -->
+{% block table_create_title %}Add competitors{% endblock %}
+{% block create_form_action_url %}{% url 'inv_profiles:add_competitor' profile.id %}{% endblock %}
+{% block table_create_row_title %}Name{% endblock %}
+{% block table_create_row_form_element %}{{ form.name }}{% endblock %}
+
+{% block create_form_table_row %}
+<p style="background-color: #C7D8C1; margin: 0px;  font-size: 16px; color: black">Name</p>
+    {{ form.name }}
+<p style="background-color: #C7D8C1; margin: 0px;  font-size: 16px; color: black">Impact</p>
+    {{ form.competitor_impact }}
+{% endblock %}
+
+{% block submit_create_label %}Create new competitor{% endblock %}
+
+
+<!-- Display/modify form -->
+{% block table_display_title %}All competitor:{% endblock %}
+{% block table_display_row %}
+    <th style="background: #C7D8C1">Name</th>
+    <th style="background: #C7D8C1">Impact</th>
+    <th style="background: #C7D8C1"></th>
+{% endblock %}
+
+{% block modify_form_action_url %}
+    {% url 'inv_profiles:modify_competitor' profile.id element.id %}
+{% endblock %}
+
+<!-- Show this when the user enteres the manage reports page to display a list of reports that can be modified -->
+{% block modify_form_display_row %}
+    <td width="40%">{{ element.name }}</td>
+    <td width="40%">{{ element.get_competitor_impact_display }}</td>
+{% endblock %}
+
+<!-- Show this when the user click on "Modify" -->
+{% block modify_form_row %}
+    <td width="40%">{{ modify_form.name }}</td>
+    <td width="40%">{{ modify_form.competitor_impact }}</td>
+{% endblock %}
+
+{% block modify_button_href %}
+    {% url 'inv_profiles:modify_competitor' profile.id element.id %}
+{% endblock %}
+
+{% block delete_button_href %}
+    {% url 'inv_profiles:delete_competitor' profile.id element.id %}
+{% endblock %}

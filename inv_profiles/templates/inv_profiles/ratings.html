@@ -1,0 +1,54 @@
+{% extends 'momentumx/base.html' %}
+{% load static %}
+{% block main %}
+			<div class="container"> 
+				
+				<!-- Logo -->
+				<div id="logo">
+					<h1><a href="#">Investment profiles</a></h1>
+					<span class="tag">Analyst ratings</span>
+				</div>
+			</div>
+		</div>
+	<!-- Header --> 
+
+	<!-- Main -->
+		<div id="main">
+			<div class="container">
+				<div class="row">
+
+					<!-- Sidebar -->
+					<div id="sidebar" class="12u">
+						<section>
+							<div class="row">
+								<section class="12u">
+										<a href="{% url 'inv_profiles:profiles' %}" class="btn btn-light btn-sm" style="width: 10%">Profiles</a>
+										<a href="#" class="btn btn-light btn-sm" style="width: 10%">Investments</a>
+										<a href="#" class="btn btn-light btn-sm" style="width: 10%">Events</a>
+										<a href="#" class="btn btn-light btn-sm" style="width: 10%">Reports</a>
+										<a href="#" class="btn btn-light btn-sm" style="width: 10%">News</a>
+										<a href="#" class="btn btn-light btn-sm" style="width: 10%">Dividends</a>
+										<a href="#" class="btn btn-light btn-sm" style="width: 10%">Charts</a>
+										<a href="#" class="btn btn-light btn-sm" style="width: 10%">Analyst ratings</a>
+										<a href="#" class="btn btn-light btn-sm" style="width: 10%">Financial data</a>
+								</section>
+							</div>
+						</section>
+					</div>
+
+                    <br />
+                    <br />
+					<!-- Content -->
+					<div id="content" class="12u skel-cell-important">
+						<section style="margin: 0px auto">
+							<header>
+								<h2>Analyst ratings</h2>
+							</header>
+						</section>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	<!-- /Main -->
+	{% endblock %}

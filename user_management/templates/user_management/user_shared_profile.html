@@ -1,0 +1,30 @@
+{% extends 'user_management/base_profile.html' %}
+{% block title %}Shared investment profiles{% endblock %}
+{% block table_title %}All profiles you have shared with others{% endblock %}
+    {% if shared_profiles %}
+        {% block table_thead %}
+            <th style="width: 250px; background-color: #e6ede4; font-weight: bold">Company</th>
+            <th style="width: 250px; background-color: #e6ede4; font-weight: bold">Opinion fundamentals</th>
+            <th style="width: 250px; background-color: #e6ede4; font-weight: bold">Opinion technicals</th>
+            <th style="width: 250px; background-color: #e6ede4; font-weight: bold">Actual performance</th>
+            <th style="width: 250px; background-color: #e6ede4; font-weight: bold">Status</th>
+            <th style="width: 250px; background-color: #e6ede4; font-weight: bold"></th>
+        {% endblock %}
+
+        {% block table_rows %}
+            {% for profile in shared_inv_profiles %}
+                <tr>
+                    <td><a href="{% url 'inv_profiles:view_profile' profile.id %}">{{ profile.company }}</a></td>
+                    <td>{{ profile.get_fundamental_analysis_opinion_display }}</td>
+                    <td>{{ profile.get_tech_analysis_opinion_display }}</td>
+                    <td>{{ profile.get_stock_momentum_display }}</td>
+                    <td>{{ profile.shared }}</td>
+                    <td><a href="">Make private</a></td>
+                </tr>
+            {% endfor %}
+        {% endblock %}
+    {% else %}
+        <p class="h5">
+            You have not shared any investment profiles publicly yet.
+        </p>
+    {% endif %}

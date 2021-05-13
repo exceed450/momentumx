@@ -1,0 +1,102 @@
+{% extends 'momentumx/base_content_nosidebar.html' %}
+{% block main %}
+<div class="container">
+
+				<!-- Logo -->
+				<div id="logo">
+					<h1><a href="#">Community</a></h1>
+					<span class="tag">View investment idea</span>
+				</div>
+			</div>
+		</div>
+	<!-- Header -->
+
+	<!-- Main -->
+		<div id="main">
+			<div id="content" class="container">
+				<section>
+					<div class="col-md-12">
+						<p class="h4" style="color: black">Investment idea</p>
+                        <div class="alert alert-warning">
+                            Please note: This idea should not be considered professional investment advice. It is meant as an
+                            investment idea and you are advised to do your own research as well. In no way can the person
+                            adding this idea or MomentumX be held liable in any way for any losses you might have using
+                            this idea
+                        </div>
+                        <div style="border: 4px solid #e6ede4">
+                        <table class="table" style="margin: 0px">
+                            <thead>
+                            <tr style="font-size: 18px">
+				    <th style="background-color: #e6ede4"><b>{{ idea_profile.title }}</b></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        {{ idea_profile.description }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+			<br />
+			<p class="h5" style="background: #e6ede4; color: black">Attachments:</p>
+			<p>
+                {% if idea_profile.attachments > 0 %}
+                    <p>test</p>
+                {% else %}
+                    No attachments has been added for this idea.
+                {% endif %}
+            </p>
+                        </div>
+                    <br />
+               <div style="border: 1px solid #cfd5cd; width: 50%; margin: 0px auto; background: #f7f9f6">
+                {% if idea_profile.recommendations > 0 %}
+                    <p class="btn"><b>{{ idea_profile.recommendations }}</b> people is recommending this idea.</p>
+                    <br />
+                {% elif idea_profile.recommendations < 0 %}
+                    <p class="btn">People does not recommend this idea with <b>{{ idea_profile.recommendations }}</b> votes</p>
+                    <br />
+                {% else %}
+                    <p class="btn">This idea has not been given any recommendations yet.</p>
+                    <br />
+                {% endif %}
+                <a href="{% url 'social:view_inv_idea' idea_profile.id 1 %}" class="btn" style="border: 1px dotted black">I recommend this idea</a>
+                <a href="{% url 'social:view_inv_idea' idea_profile.id 2 %}" class="btn" style="border: 1px dotted black">I do not recommend this idea</a>
+                </div>
+                        <br />
+                        <br />
+                    <div style="border: 4px solid #e6ede4">
+                        <p class="h5" style="background: #e6ede4; color: black">Add comment</p>
+                        <form method="POST" action="{% url 'social:view_inv_idea' idea_profile.id %}">
+				{% csrf_token %}
+                            {{ idea_form }}
+                            <br />
+                            <input type="submit" value="Add comment" class="btn btn-secondary" style="background-color: #e6ede4; color: black">
+                        </form>
+                        <br />
+                        {% if comments %}
+                            {% for comment in comments %}
+			    	<div style="border-top: 4px solid #e6ede4; border-bottom: 4px solid #e6ede4">
+					<p class="h6" style="background: #e6ede4">
+					Comment from user {{ comment.posted_by }} at {{ comment.date_added }}
+				    </p>
+				    {{ comment.comment }}
+				    <br />
+				    <br />
+				    <a href="" class="btn btn-seconday">Mark comment as usefull</a> - <a href="" class="btn btn-seconday">Mark comment as not usefull</a>
+                    <br />
+			    	</div>
+                                <br />
+                            {% endfor %}
+                        {% else %}
+                            <br />
+                            <p class="h6">There are no comments for {{ idea_profile.title }} yet.</p>
+                        {% endif %}
+                    </div>
+			</div>
+                    </div>
+				</section>
+			</div>
+		</div>
+	<!-- /Main -->
+{% endblock %}

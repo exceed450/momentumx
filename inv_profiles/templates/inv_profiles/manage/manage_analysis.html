@@ -1,0 +1,58 @@
+{% extends 'inv_profiles/manage/manage_template.html' %}
+{% block content_title %}Manage analysis{% endblock %}
+
+<!-- Create form -->
+{% block table_create_title %}Add analysis{% endblock %}
+{% block create_form_action_url %}{% url 'inv_profiles:manage_analysis' profile.id %}{% endblock %}
+{% block table_create_row_title %}Title{% endblock %}
+{% block table_create_row_form_element %}{{ form.title }}{% endblock %}
+
+{% block create_form_table_row %}
+<p style="background-color: #C7D8C1; margin: 0px;  font-size: 16px; color: black">Title</p>
+    {{ form.title }}
+<p style="background-color: #C7D8C1; margin: 0px;  font-size: 16px; color: black">Broker</p>
+    {{ form.broker }}
+<p style="background-color: #C7D8C1; margin: 0px;  font-size: 16px; color: black">Analyst</p>
+    {{ form.analyst }}
+{% endblock %}
+
+{% block submit_create_label %}Create new analysis{% endblock %}
+
+
+<!-- Display/modify form -->
+{% block table_display_title %}All analysis:{% endblock %}
+{% block table_display_row %}
+    <th style="background: #C7D8C1">Title</th>
+    <th style="background: #C7D8C1">Broker</th>
+    <th style="background: #C7D8C1">Analyst</th>
+    <th style="background: #C7D8C1">Link</th>
+    <th style="background: #C7D8C1"></th>
+{% endblock %}
+
+{% block modify_form_action_url %}
+    {% url 'inv_profiles:modify_analysis' profile.id element.id %}
+{% endblock %}
+
+<!-- Show this when the user enteres the manage reports page to display a list of reports that can be modified -->
+{% block modify_form_display_row %}
+    <td width="20%">{{ element.title }}</td>
+    <td width="20%">{{ element.broker }}</td>
+    <td width="20%">{{ element.analyst }}</td>
+    <td width="20%">{{ element.link }}</td>
+{% endblock %}
+
+<!-- Show this when the user click on "Modify" -->
+{% block modify_form_row %}
+    <td width="20%">{{ modify_form.title }}</td>
+    <td width="20%">{{ modify_form.broker }}</td>
+    <td width="20%">{{ modify_form.analyst }}</td>
+    <td width="20%">{{ modify_form.link }}</td>
+{% endblock %}
+
+{% block modify_button_href %}
+    {% url 'inv_profiles:modify_analysis' profile.id element.id %}
+{% endblock %}
+
+{% block delete_button_href %}
+    {% url 'inv_profiles:delete_analysis' profile.id element.id %}
+{% endblock %}

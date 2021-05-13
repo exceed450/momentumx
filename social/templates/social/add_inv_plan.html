@@ -1,0 +1,72 @@
+{% extends 'momentumx/base_content_nosidebar.html' %}
+{% block main %}
+<div class="container"> 
+				
+				<!-- Logo -->
+				<div id="logo">
+					<h1><a href="#">Community</a></h1>
+					<span class="tag">Share your investment plan(s)</span>
+				</div>
+			</div>
+		</div>
+	<!-- Header --> 
+
+	<!-- Main -->
+		<div id="main" style="style: border: 5px solid green">
+			<div id="content" class="container" style="margin: 0px auto">
+				<section>
+					<div class="row" style="margin: 0px auto">
+						<div class="col-md-12" style="margin: 0px auto">
+							<p class="h4">Share investment plan</p>
+							{% if authenticated %}
+								<p class="h5">
+									{% if user_inv_plans %}
+										All investment plans you have created are shown on this page.
+										<br />
+										Please select which investment plan you want to share below:
+										<table class="table table-bordered">
+											<thead>
+												<tr>
+													<th style="background-color: #e6ede4">Company</th>
+													<th style="background-color: #e6ede4"></th>
+												</tr>
+											</thead>
+											<tbody>
+												{% for user_plan in user_inv_plans %}
+												    <tr>
+													    <td>{{ user_plan.company }}</td>
+													    <td>
+														{% if user_plan.shared %}
+                                                            <a href="{% url 'social:add_inv_plan' user_plan.id %}" class="btn btn-secondary" style="background-color: #e6ede4; color: black">Unshare plan</a>
+														{% else %}
+														    <a href="{% url 'social:add_inv_plan' user_plan.id %}" class="btn btn-secondary" style="background-color: #e6ede4; color: black">Share plan</a>
+														{% endif %}
+													    </td>
+												    </tr>
+												{% endfor %}
+											</tbody>
+										</table>
+									{% else %}
+										You dont have any investment plans to share.
+										<br />
+										You need to create one or more investment plans in order to share them.
+										<br />
+										To created an investment plan, <a href="">click here</a>.
+									{% endif %}
+								</p>
+							{% else %}
+								<p class="h5">
+									You need to be logged in to share any investment plans.
+									<br />
+									You can <a href="">log-in here</a> or <a href="">create a new account</a>.
+								</p>
+							{% endif %}
+									
+						</div>
+					</div>
+				
+				</section>
+			</div>
+		</div>
+	<!-- /Main -->
+{% endblock %}

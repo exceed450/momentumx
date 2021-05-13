@@ -1,0 +1,55 @@
+{% extends 'inv_profiles/manage/manage_template.html' %}
+{% block content_title %}Manage revenue sources{% endblock %}
+
+<!-- Create form -->
+{% block table_create_title %}Add revenue sources{% endblock %}
+{% block create_form_action_url %}{% url 'inv_profiles:add_revenue_source' profile.id %}{% endblock %}
+{% block table_create_row_title %}Type{% endblock %}
+{% block table_create_row_form_element %}{{ form.type_of_source }}{% endblock %}
+
+{% block create_form_table_row %}
+<p style="background-color: #C7D8C1; margin: 0px;  font-size: 16px; color: black">Type</p>
+    {{ form.type_of_source }}
+<p style="background-color: #C7D8C1; margin: 0px;  font-size: 16px; color: black">Frequency</p>
+    {{ form.source_frequency }}
+<p style="background-color: #C7D8C1; margin: 0px;  font-size: 16px; color: black">Description</p>
+    {{ form.description }}
+{% endblock %}
+
+{% block submit_create_label %}Create new revenue source{% endblock %}
+
+
+<!-- Display/modify form -->
+{% block table_display_title %}All revenue sources:{% endblock %}
+{% block table_display_row %}
+    <th style="background: #C7D8C1">Type</th>
+    <th style="background: #C7D8C1">Frequency</th>
+    <th style="background: #C7D8C1">Description</th>
+    <th style="background: #C7D8C1"></th>
+{% endblock %}
+
+{% block modify_form_action_url %}
+    {% url 'inv_profiles:modify_rev_source' profile.id element.id %}
+{% endblock %}
+
+<!-- Show this when the user enteres the manage reports page to display a list of reports that can be modified -->
+{% block modify_form_display_row %}
+    <td width="25%">{{ element.get_type_of_source_display }}</td>
+    <td width="25%">{{ element.get_source_frequency_display }}</td>
+    <td width="25%">{{ element.description }}</td>
+{% endblock %}
+
+<!-- Show this when the user click on "Modify" -->
+{% block modify_form_row %}
+    <td width="25%">{{ modify_form.type_of_source }}</td>
+    <td width="25%">{{ modify_form.source_frequency }}</td>
+    <td width="25%">{{ modify_form.description }}</td>
+{% endblock %}
+
+{% block modify_button_href %}
+    {% url 'inv_profiles:modify_rev_source' profile.id element.id %}
+{% endblock %}
+
+{% block delete_button_href %}
+    {% url 'inv_profiles:delete_rev_sources' profile.id element.id %}
+{% endblock %}

@@ -1,0 +1,182 @@
+{% extends 'momentumx/base.html' %}
+{% load static %}
+{% block main %}
+			<div class="container">
+				
+				<!-- Logo -->
+				<div id="logo">
+					<h1><a href="#">Investment profiles</a></h1>
+					<span class="tag">Keep track of each investment with an investment profile</span>
+				</div>
+			</div>
+		</div>
+	<!-- Header --> 
+
+	<!-- Main -->
+		<div id="main">
+			<div class="container" style="border: 1px solid #C7D8C1">
+                <section class="8u" style="margin: 0px auto">
+                    <div style="width: 85%; margin: 0px  auto">
+										<a href="#" class="btn btn-success btn-sm" style="width: 100px; background: #e6ede4; color: black">About</a>
+										<a href="{% url 'inv_profiles:profiles' %}" class="btn btn-success btn-sm" style="width: 100px; background: #e6ede4; color: black">Technicals</a>
+										<a href="#" class="btn btn-sm" style="width: 100px; background: #e6ede4; color: black; border: 1px solid green">Fundamentals</a>
+										<a href="#" class="btn btn-success btn-sm" style="width: 100px; background: #e6ede4; color: black">Calendar</a>
+										<a href="#" class="btn btn-success btn-sm" style="width: 100px; background: #e6ede4; color: black">News</a>
+										<a href="#" class="btn btn-success btn-sm" style="width: 100px; background: #e6ede4; color: black">Ratings</a>
+                    </div>
+                </section>
+
+                <br />
+                <br />
+					
+				<!-- Content -->
+				<div id="content" class="12u skel-cell-important">
+                	<header>
+						<h2>Investment profile for {{ profile.company }}</h2>
+					</header>
+
+					<!-- FIRST FORM START -->
+					<form method="POST" action="{% url 'inv_profiles:edit_profile' profile.id %}">
+						{% csrf_token %}
+
+						<!-- GENERAL INFORMATION -->
+						<section style="border: 3px solid darkgreen">
+							<h2 style="background-color: #C7D8C1; font-size: 18px; padding: 5px"><b>GENERAL INFORMATION</b></h2>
+							<table class="table table-bordered" style="border-bottom: 1px dotted black; margin: 0px">
+								<thead>
+									<tr>
+										<th style="width: 250px"><b>Company</b></th>
+										<th style="width: 250px"><b>Exchange</b></th>
+										<th style="width: 250px"><b>Ticker</b></th>
+										<th style="width: 250px"><b>Your rating</b></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>{{ form.company }}</td>
+										<td>{{ form.exchange }}</td>
+										<td>{{ form.ticker }}</td>
+										<td>{{ form.rating }}</td>
+									</tr>
+								</tbody>
+							</table>
+                        
+						<!-- DECISIONS -->
+                        <div style="background-color: #e6ede4; width: 100%; margin: 0px auto; height: 50px"><b></b></div>
+						<h2 style="background-color: #C7D8C1; font-size: 18px; padding: 5px"><b>DECISIONS</b></h2>
+						
+						<table class="table table-bordered" style="border-bottom: 1px dotted #C7D8C1; margin: 0px">
+							<thead>
+								<tr>
+									<th><b>Decision</b></th>
+									<th><b>Opinion technical analysis<br/></b></th>
+                                    <th><b>Opinion fundamental analysis<br/></b></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td style="width: 250px">{{ form.investment_decision }}</td>
+                                    <td style="width: 250px">{{ form.tech_analysis_opinion }}</td>
+									<td style="width: 250px">{{ form.fundamental_analysis_opinion }}</td>
+								</tr>
+							</tbody>
+							</table>
+
+						<!-- ABOUT THE INVESTMENT -->
+                        <div style="background-color: #e6ede4; width: 100%; margin: 0px auto; height: 50px"><b></b></div>
+						<h2 style="background-color: #C7D8C1; font-size: 18px; padding: 5px"><b>ABOUT THE INVESTMENT</b></h2>
+						<table class="table table-bordered" style="margin: 0px">
+							<thead>
+								<tr>
+									<th><b>Investment type</b></th>
+									<th><b>Investment status</b></th>
+									<th><b>Stock momentum</b></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td style="width: 250px">{{ form.investment_type }}</td>
+									<td style="width: 250px">{{ form.investment_status }}</td>
+									<td style="width: 250px">{{ form.stock_momentum }}</td>
+								</tr>
+							</tbody>
+						</table>
+
+						<!-- INVESTMENT STRATEGIES -->
+                        <div style="background-color: #e6ede4; width: 100%; margin: 0px auto; height: 50px"><b></b></div>
+                        <h2 style="background-color: #C7D8C1; padding: 5px; font-size: 18px"><b>INVESTMENT STRATEGIES</b></h2>
+						<table class="table table-bordered" style="margin: 0px">
+							<thead>
+								<tr>
+									<th><b>Entry strategy</b></th>
+									<th><b>Exit strategy</b></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td style="width: 250px">{{ form.entry_strategy }}</td>
+									<td style="width: 250px">{{ form.exit_strategy }}</td>
+								</tr>
+							</tbody>
+						</table>
+
+                    <!-- NOTES -->
+                <div style="background-color: #e6ede4; width: 100%; margin: 0px auto; height: 50px"><b></b></div>
+					<h2 style="background-color: #C7D8C1; padding: 5px; font-size: 18px"><b>NOTES</b></h2>
+					<table class="table table-bordered" style="border-bottom: 1px dotted black">
+                    	<tbody>
+							<tr>
+								<td>{{ form.general_notes }}</td>
+							</tr>
+                        </tbody>
+					</table>
+						<input type="submit" name="save_edit_form" value="Save changes" class="btn btn-outline-secondary">
+                            <br />
+                            <br />
+                            							<!-- REPORTS -->
+                            <div style="background-color: #e6ede4; width: 100%; margin: 0px auto; height: 50px"><b></b></div>
+							<h2 style="background-color: #C7D8C1; padding: 5px; font-size: 18px"><b>OTHER INFORMATION</b></h2>
+                            <br />
+							<table class="table table-bordered" style="margin: 0px">
+								<tbody>
+									<tr align="left">
+										<td>
+                                            <h2 style="font-size: 16px"><b><a href="{% url 'inv_profiles:manage_reports' profile.id %}" class="btn btn-secondary" style="background-color: #C7D8C1; color: black">MANAGE REPORTS</a></b></h2>
+                                        </td>
+                                        <td>
+                                            <h2 style="font-size: 16px"><b><a href="{% url 'inv_profiles:manage_analysis' profile.id %}" class="btn btn-secondary" style="background-color: #C7D8C1; color: black">MANAGE ANALYSIS</a></b></h2>
+                                        </td>
+                                        <td>
+                                            <h2 style="font-size: 16px"><b><a href="{% url 'inv_profiles:manage_revenue_sources' profile.id %}" class="btn btn-secondary" style="background-color: #C7D8C1; color: black">MANAGE REVENUE SOURCES</a></b></h2>
+                                        </td>
+                                        <td>
+                                            <h2 style="font-size: 16px"><b><a href="{% url 'inv_profiles:manage_transactions' profile.id %}" class="btn btn-secondary" style="background-color: #C7D8C1; color: black">MANAGE TRANSACTIONS</a></b></h2>
+                                        </td>
+
+									</tr>
+                                    <tr align="left">
+                                        <td>
+                                            <h2 style="font-size: 16px"><b><a href="{% url 'inv_profiles:manage_business_segments' profile.id %}" class="btn btn-secondary" style="background-color: #C7D8C1; color: black">MANAGE BUSINESS SEGMENTS</a></b></h2>
+                                        </td>
+                                        <td>
+                                            <h2 style="font-size: 16px"><b><a href="{% url 'inv_profiles:manage_competitors' profile.id %}" class="btn btn-secondary" style="background-color: #C7D8C1; color: black">MANAGE COMPETITORS</a></b></h2>
+                                        </td>
+                                        <td>
+                                            <h2 style="font-size: 16px"><b><a href="{% url 'inv_profiles:manage_metrics' profile.id %}" class="btn btn-secondary" style="background-color: #C7D8C1; color: black">MANAGE METRICS</a></b></h2>
+                                        </td>
+                                        <td>
+                                            <h2 style="font-size: 16px"><b><a href="{% url 'inv_profiles:manage_risks' profile.id %}" class="btn btn-secondary" style="background-color: #C7D8C1; color: black">MANAGE RISKS</a></b></h2>
+                                        </td>
+                                    </tr>
+                                </tbody>
+							</table>
+				</section>
+                <br />
+                <a href="" class="btn btn-secondary">Back to investment profiles</a>
+			<br /><br />
+			</div>
+		</div>
+	</div>
+</div>
+	<!-- /Main -->
+	{% endblock %}

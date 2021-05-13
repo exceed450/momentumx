@@ -1,0 +1,81 @@
+{% extends 'momentumx/base.html' %}
+{% load static %}
+{% block main %}
+			<div class="container">
+
+				<!-- Logo -->
+				<div id="logo">
+					<h1><a href="#">User profile for {{ user.name }}</a></h1>
+					<span class="tag">Manage your profile</span>
+				</div>
+			</div>
+		</div>
+	<!-- Header -->
+
+	<!-- Main -->
+		<div id="main">
+			<div class="container" style="border: 1px solid #C7D8C1">
+                <section class="8u">
+                    <div style="width: 1200px; margin: 0px auto">
+                                <a href="" class="btn btn-success btn-sm" style="width: 150px; background: #e6ede4; color: black">User profile</a>
+                                <a href="{% url 'user:user_investment_profile' %}" class="btn btn-success btn-sm" style="width: 150px; background: #e6ede4; color: black">Investment profiles</a>
+                                <a href="{% url 'user:user_shared_profiles' %}" class="btn btn-success btn-sm" style="width: 150px; background: #e6ede4; color: black">Shared profiles</a>
+                                <a href="{% url 'user:user_shared_ideas' %}" class="btn btn-success btn-sm" style="width: 150px; background: #e6ede4; color: black">Shared ideas</a>
+                                <a href="{% url 'user:user_groups' %}" class="btn btn-success btn-sm" style="width: 150px; background: #e6ede4; color: black">Groups</a>
+                                <a href="{% url 'user:user_permissions' %}" class="btn btn-success btn-sm" style="width: 150px; background: #e6ede4; color: black">Permissions</a>
+                                <a href="{% url 'user:user_settings' %}" class="btn btn-success btn-sm" style="width: 150px; background: #e6ede4; color: black">Settings</a>
+                        </div>
+                </section>
+					<!-- Content -->
+					<div id="content" class="12u skel-cell-important">
+                            <header>
+								<h2>
+                                    {% block title %}
+                                        User profile
+                                    {% endblock %}
+                                </h2>
+							</header>
+
+                        <!-- BASIC INFORMATION -->
+						<section style="border: 3px solid #C7D8C1">
+                            <h2 style="background-color: #C7D8C1; font-size: 18px; padding: 5px"><b>{% block table_title %}PROFILE INFORMATION{% endblock %}</b></h2>
+                            <table class="table table-bordered" style="border-bottom: 1px dotted black; margin: 0px">
+                                <thead>
+                                    {% block table_thead %}
+                                    {% endblock %}
+                                </thead>
+                                <tbody>
+                                    {% block table_rows %}
+                                    <tr>
+										<td style="width: 200px">Username:</td>
+                                        <td style="width: 400px">data</td>
+                                        <td style="width: 100px"><a href="" class="btn btn-outline-secondary">Edit</a></td>
+									</tr>
+                                    <tr>
+                                        <td style="width: 200px">E-mail:</td>
+                                        <td style="width: 400px">data</td>
+                                        <td style="width: 100px"><a href="" class="btn btn-outline-secondary">Edit</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 200px">Password:</td>
+                                        <td style="width: 400px">data</td>
+                                        <td style="width: 100px"><a href="" class="btn btn-outline-secondary">Edit</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 200px">First name:</td>
+                                        <td style="width: 400px">data</td>
+                                        <td style="width: 100px"><a href="" class="btn btn-outline-secondary">Edit</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 200px">Last name:</td>
+                                        <td style="width: 400px">data</td>
+                                        <td style="width: 100px"><a href="" class="btn btn-outline-secondary">Edit</a></td>
+                                    </tr>
+                                    {% endblock %}
+								</tbody>
+							</table>
+				</div>
+			</div>
+		</div>
+	<!-- /Main -->
+	{% endblock %}

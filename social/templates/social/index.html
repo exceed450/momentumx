@@ -1,0 +1,103 @@
+{% extends 'momentumx/base_content_nosidebar.html' %}
+{% block main %}
+<div class="container"> 
+				
+				<!-- Logo -->
+				<div id="logo">
+					<h1><a href="#">Community</a></h1>
+					<span class="tag">Share ideas and investment plans</span>
+				</div>
+			</div>
+		</div>
+	<!-- Header --> 
+
+	<!-- Main -->
+		<div id="main" style="style: border: 5px solid green">
+			<div id="content" class="container" style="margin: 0px auto">
+				<section>
+					<div class="row" style="margin: 0px auto">
+                        {% if authenticated %}
+                            <div class="col-md-12" style="margin: 0px auto">
+
+                                <!-- Investment ideas -->
+                                <caption><b><p class="h5">Shared investment ideas</p></b></caption>
+                                    <table class="table table-bordered" style="border-bottom: 1px dotted black; margin: 0px">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 250px; background-color: #e6ede4"><b>Posted by</b></th>
+                                                <th style="width: 450px; background-color: #e6ede4"><b>Title</b></th>
+                                                <th style="width: 300px; background-color: #e6ede4"><b>Date added</b></th>
+                                                <th style="width: 50px; background-color: #e6ede4"><b>Comments</b></th>
+                                                <th style="width: 50px; background-color: #e6ede4"><b>Recommendations</b></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% if ideas %}
+                                                {% for idea in ideas %}
+                                                <tr>
+                                                    <td><a href="">{{ idea.posted_by }}</td>
+                                                    <td><a href="{% url 'social:view_inv_idea' idea.id %}">{{ idea.title }}</a></td>
+                                                    <td>{{ idea.date_added }}</td>
+                                                    <td>
+                                                        {% if idea.comments|length > 0 %}
+                                                            <a href="">{{ idea.comments|length }}</a>
+                                                        {% else %}
+                                                            {{ idea.comments|length }}
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>{{ idea.recommendation|length }}</td>
+                                                </tr>
+                                                {% endfor %}
+                                            {% endif %}
+                                        </tbody>
+                                    </table>
+                                <br />
+                                <a href="{% url 'social:add_inv_idea' %}" class="btn btn-secondary" style="background-color: #e6ede4; color: black">Share investment idea</a>
+                            </div>
+                            <div class="col-md-12" style="margin: 0px auto; margin-top: 40px">
+                                <caption><b><p class="h5">Shared investment plans</p></b></caption>
+                                    <table class="table table-bordered" style="border-bottom: 1px dotted black; margin: 0px">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 250px; background-color: #e6ede4"><b>Posted by</b></th>
+                                                <th style="width: 250px; background-color: #e6ede4"><b>Title</b></th>
+                                                <th style="width: 250px; background-color: #e6ede4"><b>Date added</b></th>
+                                                <th style="width: 250px; background-color: #e6ede4"><b>Comments</b></th>
+                                                <th style="width: 250px; background-color: #e6ede4"><b>Recommandations</b></th>
+                                                <th style="width: 175px; background-color: #e6ede4"><b></b></th>
+                                                <th style="width: 175px; background-color: #e6ede4"><b></b>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+					    {% if plans %}
+                                            	{% for plan in plans %}
+                                            	<tr>
+                                                    <td>{{ plan.posted_by }}</td>
+                                                    <td><a href="{% url 'inv_profiles:view_profile' plan.id %}">{{ plan.company }}</td>
+                                                    <td>{{ plan.date_added }}</td>
+                                            	</tr>
+                                            	{% endfor %}
+                                        </tbody>
+                                    </table>
+					    {% else %}
+					    <p class="h6">No investment plans has been shared yet.</p>
+					    {% endif %}
+                                <br />
+                                <a href="{% url 'social:add_inv_plan' %}" class="btn btn-secondary" style="background-color: #e6ede4; color: black">Share investment plan</a>
+                            </div>
+					</div>
+                        {% else %}
+                            <section style="margin: 0px auto">
+                            <b>
+                                    <p class="alert alert-info h5" role="alert">You need to be logged in to share investment plans and ideas.
+                                        <br />
+                                        <a href="{% url 'user:login_user' %}">Log-in here</a> or <a href="{% url 'user:create_user' %}">create a new account</a>.
+                                    </p>
+                                </b>
+                            </section>
+                        {% endif %}
+				</section>
+			</div>
+		</div>
+	<!-- /Main -->
+{% endblock %}

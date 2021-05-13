@@ -1,0 +1,44 @@
+{% extends 'momentumx/base.html' %}
+{% load static %}
+{% block main %}
+			<div class="container">
+				
+				<!-- Logo -->
+				<div id="logo">
+					<h1><a href="#">Investment profiles</a></h1>
+					<span class="tag">Keep track of each investment with an investment profile</span>
+				</div>
+			</div>
+		</div>
+	<!-- Header --> 
+
+	<!-- Main -->
+		<div id="main">
+			<div class="container" style="border: 1px solid #C7D8C1">
+                <section class="8u" style="margin: 0px auto">
+                    <div style="width: 85%; margin: 0px  auto">
+										<a href="{% url 'inv_profiles:about' profile.id %}" class="btn btn-success btn-sm" style="width: 100px; background: #e6ede4; color: black">About</a>
+										<a href="{% url 'inv_profiles:technicals' profile.id %}" class="btn btn-success btn-sm" style="width: 100px; background: #e6ede4; color: black">Technicals</a>
+										<a href="{% url 'inv_profiles:fundamentals' profile.id %}" class="btn btn-sm" style="width: 100px; background: #e6ede4; color: #000000; border: 1px solid green">Fundamentals</a>
+										<a href="{% url 'inv_profiles:calendar' profile.id %}" class="btn btn-success btn-sm" style="width: 100px; background: #e6ede4; color: black">Upcoming events</a>
+                    </div>
+                </section>
+                    <br />
+                    <br />
+					
+					<!-- Content -->
+					<div id="content" class="12u skel-cell-important">
+                            <header>
+								<h2>Investment profile for {{ profile.company }}</h2>
+							</header>
+
+                        <!-- BASIC INFORMATION -->
+						<section style="border: 3px solid #C7D8C1">
+                            <h2 style="background-color: #C7D8C1; font-size: 18px; padding: 5px"><b>ABOUT {{ profile.company }}</b></h2>
+                            <p>Stuff about the company
+                            </p>
+				</div>
+			</div>
+		</div>
+	<!-- /Main -->
+	{% endblock %}

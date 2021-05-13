@@ -1,0 +1,114 @@
+{% extends 'momentumx/base.html' %}
+{% load static %}
+{% block main %}
+			<div class="container"> 
+				
+				<!-- Logo -->
+				<div id="logo">
+					<h1><a href="#">Investment profiles</a></h1>
+					<span class="tag">Create new investment profile</span>
+				</div>
+			</div>
+		</div>
+	<!-- Header --> 
+
+	<!-- Main -->
+		<div id="main">
+			<div class="container">
+				<div class="row">
+
+					<!-- Sidebar -->
+					<div id="sidebar" class="4u">
+						<section>
+							<header>
+								<h2>Usefull links</h2>
+							</header>
+							<div class="row">
+								<section class="10u">
+									<ul class="default">
+										<li><a href="#" class="btn btn-light">All profiles</a></li>
+										<li><a href="#" class="btn btn-light">Investments</a></li>
+										<li><a href="#" class="btn btn-light">Events</a></li>
+										<li><a href="#" class="btn btn-light">Reports</a></li>
+										<li><a href="#" class="btn btn-light">News</a></li>
+										<li><a href="#" class="btn btn-light">Dividends</a></li>
+										<li><a href="#" class="btn btn-light">Market chart (NASDAQ)</a></li>
+										<li><a href="#" class="btn btn-light">Stock chart (NASDAQ)</a></li>
+										<li><a href="#" class="btn btn-light">Analyst ratings (NASDAQ)</a></li>
+										<li><a href="#" class="btn btn-light">Financial data (WSJ)</a></li>
+									</ul>
+								</section>
+							</div>
+						</section>
+					</div>
+					
+					<!-- Content -->
+					<div id="content" class="8u skel-cell-important">
+						<section>
+							<header>
+								<h2>New investment profile</h2>
+							</header>
+							<form method="POST" action="{% url 'inv_profiles:add_profile' %}">
+								<div class="form-group">
+									<label for="company">Company:</label>
+									{{ form.company }}
+								</div>
+								<div class="form-group">
+									<label for="exchange">Exchange:</label>
+									{{ form.exchange }}
+								</div>
+								<div class="form-group">
+									<label for="ticker">Ticker:</label>
+									{{ form.ticker }}
+								</div>
+								<div class="form-group">
+									<label for="rating">Rating:</label>
+									{{ form.rating }}
+								</div>
+								<div class="form-group">
+									<label for="inv_momentum">Momentum:</label>
+									{{ form.inv_momentum }}
+								</div>
+								<div class="form-group">
+									<label for="inv_type">Type of investment:</label>
+									{{ form.inv_type }}
+								</div>
+								<div class="form-group">
+									<label for="inv_status">Status of investment:</label>
+									{{ form.inv_status }}
+								</div>
+								<div class="form-group">
+									<label for="tech_entry">Ready for entry (tech. analysis) </label>
+									{{ form.tech_entry }}
+								</div>
+								<div class="form-group">
+									<label for="fundamental_entry">Ready for entry (based on fundamentals)</label>
+									{{ form.fundamental_entry }}
+								</div>
+								<div class="form-group">
+									<label for="entry_strategy">Entry strategy:</label>
+									{{ form.entry_strategy }}
+								</div>
+								<div class="form-group">
+									<label for="exit_strategy">Exit strategy:</label>
+									{{ form.exit_strategy }}
+								</div>
+								<div class="form-group">
+									<label for="news">News:</label>
+									{{ form.news }}
+								</div>
+								<div class="form-group">
+									<label for="Broker_analysis">Broker analysis:</label>
+									{{ form.broker_analysis }}
+								</div>
+
+								<input type="submit" value="Create new investment profile">
+							</form>
+						</section>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	<!-- /Main -->
+	{% endblock %}

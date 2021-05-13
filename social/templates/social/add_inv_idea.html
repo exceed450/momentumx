@@ -1,0 +1,41 @@
+{% extends 'momentumx/base_content_nosidebar.html' %}
+{% block main %}
+<div class="container"> 
+				
+				<!-- Logo -->
+				<div id="logo">
+					<h1><a href="#">Community</a></h1>
+					<span class="tag">Add investment idea</span>
+				</div>
+			</div>
+		</div>
+	<!-- Header --> 
+
+	<!-- Main -->
+		<div id="main" style="style: border: 5px solid green">
+			<div id="content" class="container" style="margin: 0px auto">
+                <p class="h5">
+                    Share a new investment idea with other people
+                </p>
+                <small>Adding a pciture or video is optional.</small>
+                {% if success %}
+                    <p class="6"><b>Successfully added new investment idea</b></p>s
+                {% endif %}
+                <br />
+                <br />
+				<section>
+					<div class="col-md-12" style="margin: 0px auto">
+                        <form method="POST" action="{% url 'social:add_inv_idea' %}" class="table table-bordered" style="background-color: #e6ede4">
+                            {% csrf_token %}
+                            {{ form }}
+                            <br />
+                            <input type="submit" value="Add investment idea" class="btn btn-secondary" style="background-color: #e6ede4; color: black">
+                            <br />
+                            <br />
+                        </form>
+					</div>
+				</section>
+			</div>
+		</div>
+	<!-- /Main -->
+{% endblock %}
